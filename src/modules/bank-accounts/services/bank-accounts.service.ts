@@ -1,11 +1,12 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
-import { CreateBankAccountDto } from './dto/create-bank-account.dto';
-import { UpdateBankAccountDto } from './dto/update-bank-account.dto';
+import { Injectable } from '@nestjs/common';
+import { CreateBankAccountDto } from '../dto/create-bank-account.dto';
+import { UpdateBankAccountDto } from '../dto/update-bank-account.dto';
 import { BankAccountsRepository } from 'src/shared/database/repositories/bank-accounts.repositories';
+import { ValidateBankAccountOwnershipService } from './validate-bank-account-ownership.service';
 
 @Injectable()
 export class BankAccountsService {
-  constructor(private readonly bankAccountsRepo: BankAccountsRepository) {}
+  constructor(private readonly bankAccountsRepo: BankAccountsRepository, private readonly ValidateBankAccountOwnershipService: ValidateBankAccountOwnershipService) {}
 
   create(userId: string,  createBankAccountDto: CreateBankAccountDto) {
     const { color, initialBalance, name, type } = createBankAccountDto
@@ -31,8 +32,8 @@ export class BankAccountsService {
   async update(userId: string, bankAccountId: string, updateBankAccountDto: UpdateBankAccountDto) {
 
     const { color, initialBalance, name, type } = updateBankAccountDto
-    
-    await this.validateBankAccountOwnership(userId, bankAccountId);
+
+    await this.ValidateBankAccountOwnershipService.validate(userId, bankAccountId);
 
     return this.bankAccountsRepo.update({
       where: { id: bankAccountId },
@@ -44,7 +45,7 @@ export class BankAccountsService {
 
   async delete(userId: string, bankAccountId: string) {
 
-    await this.validateBankAccountOwnership(userId, bankAccountId);
+    await this.ValidateBankAccountOwnershipService.validate(userId, bankAccountId);
 
     await this.bankAccountsRepo.delete({
       where: { id: bankAccountId }
@@ -54,13 +55,5 @@ export class BankAccountsService {
     
   }
 
-  private async validateBankAccountOwnership( userId: string, bankAccountId: string ) {
-    const isOwner = await this.bankAccountsRepo.findFirst({
-      where: { id: bankAccountId, userId }
-    });
 
-    if (!isOwner) {
-      throw new NotFoundException('Bank Account Not Found')
-    }
-  }
 }
