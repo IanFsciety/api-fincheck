@@ -1,7 +1,7 @@
 # FINCHECK - Controle suas finanças
 
 
-<img src="./assets/images/preview.png" alt="preview">
+<img src="./assets/preview.png" alt="preview">
 
 > O FINCHECK é uma aplicação para gerenciamento de Finanças pessoais. Monitore seus gastos de forma simples, podendo filtrar por conta, categoria e data.
 
@@ -29,12 +29,12 @@
 
 ### Página de Login
 
-<img src="./assets/images/Login.jpg" alt="preview" width="400px">
+<img src="./assets/Login.jpg" alt="preview" width="400px">
 
 ### Página Home
 
-<img src="./assets/images/home1.jpg" alt="preview" width="400px">
+<img src="./assets/home1.jpg" alt="preview" width="400px">
 
 ## Página Home Filtro
 
-<img src="./assets/images/Home2.png" alt="preview" width="400px">
+<img src="./assets/Home2.png" alt="preview" width="400px">
