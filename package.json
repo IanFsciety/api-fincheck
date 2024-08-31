@@ -2,6 +2,9 @@
   "name": "api",
   "version": "0.0.1",
   "description": "",
+  "engines": {
+    "node": ">=14.x"
+  },
   "author": "",
   "private": true,
   "license": "UNLICENSED",
