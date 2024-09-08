@@ -1,5 +1,5 @@
 import { Injectable } from "@nestjs/common";
-import { type Prisma} from '@prisma/client'
+import { type Prisma } from '@prisma/client';
 
 import { PrismaService } from "../prisma.service";
 
@@ -14,5 +14,9 @@ export class UsersRepository {
 
   findUnique(findUnique: Prisma.UserFindUniqueArgs) {
     return this.prismaService.user.findUnique(findUnique);
+  }
+
+  update(updateDto: Prisma.UserUpdateArgs) {
+    return this.prismaService.user.update(updateDto);
   }
 }
