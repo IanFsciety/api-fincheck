@@ -1,5 +1,5 @@
 import { Injectable } from "@nestjs/common";
-import { type Prisma} from '@prisma/client'
+import { type Prisma } from '@prisma/client';
 
 import { PrismaService } from "../prisma.service";
 
@@ -8,9 +8,9 @@ import { PrismaService } from "../prisma.service";
 export class CategoriesRepository {
   constructor(private readonly prismaService: PrismaService) {}
 
-  // create(createDto: Prisma.UserCreateArgs) {
-  //   return this.prismaService.user.create(createDto);
-  // }
+  create(createDto: Prisma.CategoryCreateArgs) {
+    return this.prismaService.category.create(createDto);
+  }
 
   findMany(findManyDto: Prisma.CategoryFindManyArgs) {
     return this.prismaService.category.findMany(findManyDto);
