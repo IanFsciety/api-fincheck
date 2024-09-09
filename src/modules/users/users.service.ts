@@ -22,12 +22,12 @@ export class UsersService {
   }
 
   async updateUserToPremium(userId: string, updateUserDto: UpdateUserDto) {
-    const { isPremiumSuccess } = updateUserDto
+    const { isPremium } = updateUserDto
 
     const userUpdatePlan = await this.usersRepo.update({
       where: { id: userId },
       data: {
-        isPremium: isPremiumSuccess
+        isPremium
       }
     });
 
